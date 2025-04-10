@@ -42,7 +42,7 @@ export default function Home() {
   async function personalDetail(val) {
     try {
       setLoading(true);
-      let returnValue = await axios.post(`http://localhost:8080/ecomm/product/personaldetails/${val}`);
+      let returnValue = await axios.post(`https://ecomm-8piu.onrender.com/ecomm/product/personaldetails/${val}`);
       navigate("/personaldetails", { state: { personaldata: returnValue.data } });
       toast.success("Success! Your order is placed.");
       setLoading(false);
@@ -63,7 +63,7 @@ export default function Home() {
     if (e) {
       try {
         // setLoading(true);
-        let returnValue = await axios.post(`http://localhost:8080/ecomm/product/setSearchTerm/${e}`);
+        let returnValue = await axios.post(`https://ecomm-8piu.onrender.com/product/setSearchTerm/${e}`);
         setItems(returnValue.data);
         // setLoading(false);
       } catch (error) {

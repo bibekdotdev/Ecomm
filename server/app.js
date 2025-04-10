@@ -47,7 +47,7 @@ app.get('/allData', async (req, res) => {
   });
   app.all('*',(req,res)=>{
     console.log('hi');
-    res.redirect('https://ecomm-8piu.onrender.com/notfoundpage')
+    res.redirect('ecomm-8piu.onrender.com/notfoundpage')
   })
   
   

@@ -54,7 +54,7 @@ routes.post("/placedOrder", async (req, res) => {
       console.log(newOrder);
       // Save order to DB
       await newOrder.save();
-      await firstProduct.updateOne({ $set: { quantity: firstProduct.quantity - 1 } });
+      await firstProduct.updateOne({ $set: { quantity: firstProduct.quantity - (orderData.orderItems.reduce((sum, item) => sum + item.quantity, 0)) } });
 
       await firstProduct.save();
       res.status(201).json({ message: "Order placed successfully", order: newOrder });

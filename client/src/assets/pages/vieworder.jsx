@@ -22,7 +22,7 @@ export default function ViewOrders() {
         async function fetchOrders() {
             setLoading(true); // start loading
             try {
-                let response = await axios.get(`http://localhost:8080/ecomm/admin/vieworder/${token}`);
+                let response = await axios.get(`https://ecomm-8piu.onrender.com/ecomm/admin/vieworder/${token}`);
                 const sortedOrders = response.data.sort((a, b) => new Date(b.orderTime) - new Date(a.orderTime));
                 setOrders(sortedOrders);
             } catch (error) {
@@ -55,7 +55,7 @@ export default function ViewOrders() {
         };
 
         try {
-            await axios.put(`http://localhost:8080/ecomm/admin/updateorder/${selectedOrder._id}`, updatedOrder);
+            await axios.put(`https://ecomm-8piu.onrender.com/ecomm/admin/updateorder/${selectedOrder._id}`, updatedOrder);
             setOrders((prevOrders) =>
                 prevOrders.map((order) =>
                     order._id === selectedOrder._id ? { ...order, ...updatedOrder } : order
@@ -69,7 +69,7 @@ export default function ViewOrders() {
 
     const handleDeleteOrder = async (orderId) => {
         try {
-            await axios.delete(`http://localhost:8080/ecomm/admin/deleteorder/${orderId}`);
+            await axios.delete(`https://ecomm-8piu.onrender.com/ecomm/admin/deleteorder/${orderId}`);
             setOrders((prevOrders) => prevOrders.filter((order) => order._id !== orderId));
         } catch (error) {
             console.error("Error deleting order:", error);

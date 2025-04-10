@@ -40,7 +40,7 @@ export default function Home() {
     async function fetchData() {
       try {
         setLoading(true);
-        const response = await axios.get("http://localhost:8080/allData");
+        const response = await axios.get("https://ecomm-8piu.onrender.com/allData");
         console.log(response);
         setItems(response.data);
         setLoading(false);
@@ -61,7 +61,7 @@ export default function Home() {
   async function personalDetail(val) {
     try {
       setLoading(true);
-      let returnValue = await axios.post(`http://localhost:8080/ecomm/product/personaldetails/${val}`);
+      let returnValue = await axios.post(`https://ecomm-8piu.onrender.com/ecomm/product/personaldetails/${val}`);
       navigate("/personaldetails", { state: { personaldata: returnValue.data } });
       toast.success("Success! Your order is placed.");
       setLoading(false);
@@ -81,7 +81,7 @@ export default function Home() {
     setSearchTerm(e);
     if (e) {
       try {
-        let returnValue = await axios.post(`http://localhost:8080/product/setSearchTerm/${e}`);
+        let returnValue = await axios.post(`https://ecomm-8piu.onrender.com/ecomm/product/setSearchTerm/${e}`);
         setItems(returnValue.data);
       } catch (error) {
         console.error("Search error:", error);

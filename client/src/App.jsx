@@ -15,6 +15,7 @@ function App() {
       <Footer />
     </Box>
   );
+};
   
 
 export default App;

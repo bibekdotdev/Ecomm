@@ -93,7 +93,7 @@ const ProductForm = () => {
       const token = Cookies.get("token");
       formData.append("token", token);
 
-      await axios.post("http://localhost:8080/ecomm/product/add", formData, {
+      await axios.post("https://ecomm-8piu.onrender.com/ecomm/product/add", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`,

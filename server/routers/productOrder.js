@@ -214,8 +214,19 @@ routes.post("/placeOrderFromCard", async (req, res) => {
     const decoded = await jwt.verify(token, secretKey);
     let buyer = await Owner.findOne({ email: decoded.email });
     
+    for (let products of orderData.orderItems) {
+      let product = await Product.findById(products.productId);
+    
+      if (product.quantity < products.quantity) {
+        return res.status(400).json({
+          error: `We're sorry, your requested quantity (${products.quantity}) for "${product.name}" exceeds the available stock (${product.quantity}). Please reduce the quantity to proceed with your order.`
+        });
+      }
+    }
+    
     orderData.orderItems.map(async (products) => {
       let product = await Product.findById(products.productId);
+      
       const newOrder = new Order({
         buyer: buyer._id,
         seller: product.owner,
@@ -226,6 +237,9 @@ routes.post("/placeOrderFromCard", async (req, res) => {
         quantity: products.quantity,
         orderTime: new Date().toISOString(),
       });
+      await product.updateOne({ $set: { quantity:product.quantity -  products.quantity } });
+
+      await product.save();
       await newOrder.save();
     });
     
@@ -235,7 +249,6 @@ routes.post("/placeOrderFromCard", async (req, res) => {
     res.status(500).send({ message: 'An error occurred while placing the order.', error: error.message });
   }
 });
-
 
 
 routes.delete("/cancel-myorder", async (req, res) => {

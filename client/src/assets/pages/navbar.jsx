@@ -56,6 +56,9 @@ const Navbar = () => {
               <li className="nav-item">
                 <Link className="nav-link text-white" to="/myorder" onClick={handleNavClick}>📦 MyOrder</Link>
               </li>
+               <li className="nav-item">
+                    <Link className="nav-link text-white" to="/admin" onClick={handleNavClick}>⚙️ Admin</Link>
+                  </li>
               {!isLogin ? (
                 <>
                   <li className="nav-item">
@@ -70,9 +73,7 @@ const Navbar = () => {
                   <li className="nav-item">
                     <button className="nav-link btn btn-outline-light text-white" onClick={Logout}>🚪 Logout</button>
                   </li>
-                  <li className="nav-item">
-                    <Link className="nav-link text-white" to="/admin" onClick={handleNavClick}>⚙️ Admin</Link>
-                  </li>
+                 
                 </>
               )}
             </ul>
@@ -95,6 +96,9 @@ const Navbar = () => {
           <li className="nav-item">
             <Link className="nav-link text-white" to="/myorder" onClick={handleNavClick}>📦 MyOrder</Link>
           </li>
+           <li className="nav-item">
+                <Link className="nav-link text-white" to="/admin" onClick={handleNavClick}>⚙️ Admin</Link>
+              </li>
           {!isLogin ? (
             <>
               <li className="nav-item">
@@ -109,9 +113,7 @@ const Navbar = () => {
               <li className="nav-item">
                 <button className="nav-link btn btn-outline-light text-white" onClick={Logout}>🚪 Logout</button>
               </li>
-              <li className="nav-item">
-                <Link className="nav-link text-white" to="/admin" onClick={handleNavClick}>⚙️ Admin</Link>
-              </li>
+          
             </>
           )}
         </ul>

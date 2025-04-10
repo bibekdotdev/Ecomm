@@ -15,7 +15,7 @@ const Login = () => {
     e.preventDefault();
     setLoading(true); // Start loading
     try {
-      let jwtToken = await axios.post("http://localhost:8080/ecomm/authentication/login", { email, password });
+      let jwtToken = await axios.post("https://ecomm-8piu.onrender.com/ecomm/authentication/login", { email, password });
       let val = jwtToken.data;
       const redirectTo = "/home";
       console.log(redirectTo);

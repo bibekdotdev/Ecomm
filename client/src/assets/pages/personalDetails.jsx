@@ -25,7 +25,7 @@ export default function PersonalDetails() {
       setLoading(true);
       
       try {
-        const response = await axios.get(`http://localhost:8080/ecomm/product/getReviews/${detail._id}`, {
+        const response = await axios.get(`https://ecomm-8piu.onrender.com/ecomm/product/getReviews/${detail._id}`, {
           headers: {token},
         });
         setReviews(response.data.reviews);
@@ -48,7 +48,7 @@ export default function PersonalDetails() {
 
   const handleAddToCart = async () => {
     try {
-      let returnValue = await axios.post(`http://localhost:8080/ecomm/productOrder/addToCart/${detail._id}`, { token });
+      let returnValue = await axios.post(`https://ecomm-8piu.onrender.com/ecomm/productOrder/addToCart/${detail._id}`, { token });
       toast.success("Product added to cart successfully!");
     } catch (error) {
       console.error("Error adding product to cart:", error);
@@ -69,7 +69,7 @@ export default function PersonalDetails() {
 
     setLoading(true);
     try {
-      const response = await axios.post(`http://localhost:8080/ecomm/product/addReview/${detail._id}`, {
+      const response = await axios.post(`https://ecomm-8piu.onrender.com/ecomm/product/addReview/${detail._id}`, {
         token,
         rating,
         review

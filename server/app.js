@@ -21,6 +21,7 @@ mongoose.connect(process.env.CONN).then(()=> console.log("database is connected"
 app.use(express.json());
 
 app.use(cors({
+    origin:'https://ecomm-8piu.onrender.com',
     credentials:true
 }));
 

@@ -127,7 +127,7 @@ export default function Category() {
                       transition: "0.3s",
                       textAlign: "center",
                       backgroundColor: selectedCategory === categoryItem.name ? "#0a198a" : "#f0f8ff",
-                      border: selectedCategory === categoryItem.name ? "2px solid #000000" : "1px solid #dddddd",
+                      border: selectedCategory === categoryItem.name ? "2px solid #000000" : "2px solid #000000",
                       boxShadow: selectedCategory === categoryItem.name ? "0px 4px 15px rgba(0, 0, 0, 0.2)" : "none",
                     }}
                     onClick={() => {

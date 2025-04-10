@@ -10,13 +10,15 @@ const Footer = () => {
           <a href="#" className="text-white" target="_blank" rel="noopener noreferrer">
             <FaGithub />
           </a>
-          <a href="#" className="text-white" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.linkedin.com/in/bibek-jana-39aa902b9?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app " className="text-white" target="_blank" rel="noopener noreferrer">
             <FaLinkedin />
           </a>
           <a href="#" className="text-white" target="_blank" rel="noopener noreferrer">
             <FaTwitter />
           </a>
-         
+         <a href="bibekjana68@gmail.com" className="text-white">
+            <FaEnvelope />
+          </a>
         </div>
         <small className="text-white-50">&copy; {new Date().getFullYear()} Bibek Jana. All rights reserved.</small>
       </div>

@@ -105,7 +105,7 @@ export default function OrderCard() {
 
     try {
       const response = await axios.post(
-        "http://localhost:8080/ecomm/productOrder/placeOrderFromCard",
+        "https://ecomm-8piu.onrender.com/ecomm/productOrder/placeOrderFromCard",
         { orderData, token }
       );
       console.log("Order Placed:", response.data);

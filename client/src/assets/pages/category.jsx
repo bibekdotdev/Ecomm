@@ -26,7 +26,7 @@ export default function Category() {
     async function fetchData() {
       try {
         setLoading(true);
-        const response = await axios.get(`https://ecomm-8piu.onrender.com/ecomm/product/catagory/${catagory}`);
+        const response = await axios.get(`http://localhost:8080/ecomm/product/catagory/${catagory}`);
         if (response.data && response.data.length !== 0) {
           setItems(response.data);
         }
@@ -90,7 +90,7 @@ export default function Category() {
 
   async function personalDetail(val) {
     try {
-      let returnValue = await axios.post(`https://ecomm-8piu.onrender.com/ecomm/product/personaldetails/${val}`);
+      let returnValue = await axios.post(`http://localhost:8080/ecomm/product/personaldetails/${val}`);
       navigate("/personaldetails", { state: { personaldata: returnValue.data } });
     } catch (error) {
       console.error("Error fetching personal details:", error);
@@ -100,7 +100,7 @@ export default function Category() {
   async function fetchCategoryData(category) {
     try {
       setLoading(true);
-      const response = await axios.get(`https://ecomm-8piu.onrender.com/ecomm/product/subcatagory/${category}`);
+      const response = await axios.get(`http://localhost:8080/ecomm/product/subcatagory/${category}`);
       setItems(response.data);
       setLoading(false);
     } catch (error) {
@@ -146,84 +146,122 @@ export default function Category() {
           </Grid>
         </Box>
       </Container>
+      <Container>
+  <Grid container spacing={3} className="mt-3">
+    {items.map((item) => {
+      const isOutOfStock = item.quantity <= 0;
+      return (
+        <Grid item xs={12} sm={6} md={4} lg={3} key={item._id}>
+          <Card
+            className="shadow-sm"
+            onClick={() => !isOutOfStock && personalDetail(item._id)}
+            style={{
+              position: "relative",
+              cursor: isOutOfStock ? "not-allowed" : "pointer",
+              transition: "0.3s",
+              borderRadius: "12px",
+              border: "2px solid #000000",
+              boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
+              backgroundColor: isOutOfStock ? "#f5f5f5" : "#ffffff",
+              opacity: isOutOfStock ? 0.6 : 1,
+            }}
+          >
+            {/* Quantity Badge or Out of Stock */}
+            {isOutOfStock ? (
+              <Typography
+                variant="caption"
+                sx={{
+                  position: "absolute",
+                  top: 8,
+                  left: 8,
+                  backgroundColor: "#9e9e9e",
+                  color: "white",
+                  padding: "4px 8px",
+                  borderRadius: "6px",
+                  fontWeight: "bold",
+                  zIndex: 1
+                }}
+              >
+                Out of Stock
+              </Typography>
+            ) : item.quantity <= 5 && (
+              <Typography
+                variant="caption"
+                sx={{
+                  position: "absolute",
+                  top: 8,
+                  left: 8,
+                  backgroundColor: "#ff1744",
+                  color: "white",
+                  padding: "4px 8px",
+                  borderRadius: "6px",
+                  fontWeight: "bold",
+                  zIndex: 1
+                }}
+              >
+                Only {item.quantity} left!
+              </Typography>
+            )}
 
-      <Container sx={{ mt: 4 }}>
-        {loading ? (
-          <Box display="flex" justifyContent="center" alignItems="center" minHeight="300px">
-            <CircularProgress size={50} thickness={5} />
-          </Box>
-        ) : (
-          <Grid container spacing={3}>
-            {items.map((item) => (
-              <Grid item xs={12} sm={6} md={4} lg={3} key={item._id}>
-                <Card
-                  onClick={() => personalDetail(item._id)}
-                  style={{
-                    cursor: "pointer",
-                    transition: "0.3s",
-                    borderRadius: "12px",
-                    border: "2px solid #000000",
-                    boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
-                    backgroundColor: "#fff",
-                  }}
-                >
-                  <CardMedia
-                    component="img"
-                    height="200"
-                    image={item.images[0]}
-                    alt={item.name}
-                    style={{ borderTopLeftRadius: "12px", borderTopRightRadius: "12px" }}
-                  />
-                  <CardContent sx={{ textAlign: "center", padding: "16px" }}>
-                    <Typography variant="h6" fontWeight="bold" color="#333333" gutterBottom>
-                      {item.name}
-                    </Typography>
-                    <Typography variant="body1" color="textSecondary" sx={{ fontSize: "1rem", fontWeight: "bold" }}>
-                      Price: <span style={{ textDecoration: "line-through", color: "#b0b0b0" }}>₹{item.price}</span>{" "}
-                      <span style={{ color: "#333333", fontSize: "1.2rem" }}>₹{item.discountPrice}</span>
-                    </Typography>
-                    <Typography
-                      variant="body2"
-                      sx={{
-                        backgroundColor: "#ff5722",
-                        color: "white",
-                        borderRadius: "10px",
-                        display: "inline-block",
-                        padding: "5px 10px",
-                        fontWeight: "bold",
-                        fontSize: "0.9rem",
-                        marginTop: "8px",
-                      }}
-                    >
-                      {item.discount} OFF
-                    </Typography>
-                    <Button
-                      variant="contained"
-                      sx={{
-                        width: "100%",
-                        marginTop: "12px",
-                        padding: "8px",
-                        fontSize: "0.9rem",
-                        fontWeight: "bold",
-                        textTransform: "uppercase",
-                        backgroundColor: "#ff5722",
-                        boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
-                        transition: "0.3s",
-                        "&:hover": {
-                          backgroundColor: "#e64a19",
-                          transform: "scale(1.05)",
-                        },
-                      }}
-                    >
-                      View Details
-                    </Button>
-                  </CardContent>
-                </Card>
-              </Grid>
-            ))}
-          </Grid>
-        )}
-      </Container>
+            <CardMedia
+              component="img"
+              height="200"
+              image={item.images[0]}
+              alt={item.name}
+              style={{ borderTopLeftRadius: "12px", borderTopRightRadius: "12px" }}
+            />
+            <CardContent sx={{ textAlign: "center", padding: "16px" }}>
+              <Typography variant="h6" fontWeight="bold" color="#333333" gutterBottom>
+                {item.name}
+              </Typography>
+              <Typography variant="body1" color="textSecondary" sx={{ fontSize: "1rem", fontWeight: "bold" }}>
+                Price: <span style={{ textDecoration: "line-through", color: "#b0b0b0" }}>₹{item.price}</span>{" "}
+                <span style={{ color: "#333333", fontSize: "1.2rem" }}>₹{item.discountPrice}</span>
+              </Typography>
+              <Typography
+                variant="body2"
+                sx={{
+                  backgroundColor: "#ff5722",
+                  color: "white",
+                  borderRadius: "10px",
+                  display: "inline-block",
+                  padding: "5px 10px",
+                  fontWeight: "bold",
+                  fontSize: "0.9rem",
+                  marginTop: "8px",
+                }}
+              >
+                {item.discount} OFF
+              </Typography>
+              <Button
+                variant="contained"
+                className="mt-2"
+                disabled={isOutOfStock}
+                sx={{
+                  width: "100%",
+                  marginTop: "12px",
+                  padding: "8px",
+                  fontSize: "0.9rem",
+                  fontWeight: "bold",
+                  textTransform: "uppercase",
+                  backgroundColor: isOutOfStock ? "#9e9e9e" : "#ff5722",
+                  boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
+                  transition: "0.3s",
+                  "&:hover": {
+                    backgroundColor: isOutOfStock ? "#9e9e9e" : "#e64a19",
+                    transform: isOutOfStock ? "none" : "scale(1.05)",
+                  },
+                }}
+              >
+                {isOutOfStock ? "Unavailable" : "View Details"}
+              </Button>
+            </CardContent>
+          </Card>
+        </Grid>
+      );
+    })}
+  </Grid>
+</Container>
     </>
   );
 }

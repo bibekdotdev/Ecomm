@@ -17,7 +17,7 @@ const ProtectedRoute = ({ children }) => {
       }
 
       try {
-        const response = await axios.post(`http://localhost:8080/ecomm/admin/islogin/${token}`);
+        const response = await axios.post(`https://ecomm-8piu.onrender.com/ecomm/admin/islogin/${token}`);
         setIsAuth(response.data); // assuming response.data is true/false
       } catch (error) {
         console.error("Authentication error:", error);

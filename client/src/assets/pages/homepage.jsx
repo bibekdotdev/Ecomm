@@ -22,7 +22,7 @@ export default function Home() {
     async function fetchData() {
       try {
         setLoading(true);
-        const response = await axios.get("https://ecomm-8piu.onrender.com/allData");
+        const response = await axios.get("https://ecomm-8piu.onrender.com:8080/allData");
         setItems(response.data);
         setLoading(false);
       } catch (error) {

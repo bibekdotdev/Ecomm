@@ -26,7 +26,7 @@ const Signup = () => {
         e.preventDefault();
         setLoading(true);
         try {
-            let jwtToken = await axios.post('http://localhost:8080/ecomm/authentication/tempup', formData);
+            let jwtToken = await axios.post('https://ecomm-8piu.onrender.com/ecomm/authentication/tempup', formData);
             let e = jwtToken.data.email;
             setFormData({ username: "", email: "", password: "" });
             

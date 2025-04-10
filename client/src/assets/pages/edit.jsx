@@ -13,7 +13,7 @@ import "react-toastify/dist/ReactToastify.css";
 export default function Edit() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [product, setProduct] = useState({
     name: "",
     description: "",
@@ -105,7 +105,7 @@ export default function Edit() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setOpen(true);
+    setLoading(true);
 
     const formData = new FormData();
     Object.keys(product).forEach((key) => {
@@ -134,13 +134,13 @@ export default function Edit() {
         images: [],
         error: "",
       });
-      setOpen(false);
-        toast.success("Product updated successfully!");
+      setLoading(false);
+      toast.success("Product updated successfully!");
       navigate("/admin");
     } catch (error) {
       console.error("Error submitting form", error);
       toast.error("Failed to update product");
-      setOpen(false);
+      setLoading(false);
     }
   };
 
@@ -199,13 +199,13 @@ export default function Edit() {
           ))}
         </div>
 
-        <Button type="submit" variant="contained" style={{ backgroundColor: "#28a745", color: "#FFf", width: "100%", marginTop: "20px" }}>
+        <Button type="submit" variant="contained" style={{ backgroundColor: "#28a745", color: "#fff", width: "100%", marginTop: "20px" }}>
           Update Product
         </Button>
       </form>
 
-      {/* Loading Backdrop */}
-      <Backdrop sx={{ color: "#FFD700", zIndex: (theme) => theme.zIndex.drawer + 1 }} open={open}>
+      {/* Clean Backdrop loading spinner */}
+      <Backdrop sx={{ color: "#fff", zIndex: 9999 }} open={loading}>
         <CircularProgress color="inherit" />
       </Backdrop>
     </div>

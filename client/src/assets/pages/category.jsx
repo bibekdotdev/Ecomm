@@ -26,7 +26,7 @@ export default function Category() {
     async function fetchData() {
       try {
         setLoading(true);
-        const response = await axios.get(`http://localhost:8080/ecomm/product/catagory/${catagory}`);
+        const response = await axios.get(`https://ecomm-8piu.onrender.com/ecomm/product/catagory/${catagory}`);
         if (response.data && response.data.length !== 0) {
           setItems(response.data);
         }
@@ -90,7 +90,7 @@ export default function Category() {
 
   async function personalDetail(val) {
     try {
-      let returnValue = await axios.post(`http://localhost:8080/ecomm/product/personaldetails/${val}`);
+      let returnValue = await axios.post(`https://ecomm-8piu.onrender.com/ecomm/product/personaldetails/${val}`);
       navigate("/personaldetails", { state: { personaldata: returnValue.data } });
     } catch (error) {
       console.error("Error fetching personal details:", error);
@@ -100,7 +100,7 @@ export default function Category() {
   async function fetchCategoryData(category) {
     try {
       setLoading(true);
-      const response = await axios.get(`http://localhost:8080/ecomm/product/subcatagory/${category}`);
+      const response = await axios.get(`https://ecomm-8piu.onrender.com/ecomm/product/subcatagory/${category}`);
       setItems(response.data);
       setLoading(false);
     } catch (error) {

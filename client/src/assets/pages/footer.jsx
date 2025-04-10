@@ -16,9 +16,7 @@ const Footer = () => {
           <a href="#" className="text-white" target="_blank" rel="noopener noreferrer">
             <FaTwitter />
           </a>
-          <a href="mailto:someone@example.com" className="text-white">
-            <FaEnvelope />
-          </a>
+         
         </div>
         <small className="text-white-50">&copy; {new Date().getFullYear()} Bibek Jana. All rights reserved.</small>
       </div>

@@ -115,7 +115,7 @@ export default function OrderCard() {
       navigate("/Home");
     } catch (error) {
       console.error("Error placing order:", error);
-      toast.error("Failed to place order.");
+      toast.error( toast.error(error.response.data.error));
     } finally {
       setLoading(false);
     }

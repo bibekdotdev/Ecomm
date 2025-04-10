@@ -23,7 +23,7 @@ export default function MyOrder() {
         const response = await axios.get(
           `https://ecomm-8piu.onrender.com/ecomm/admin/my-orders/${token}`
         );
-
+ 
         const sortedOrders = response.data.sort((a, b) => {
           if (a.orderStatus === "Cancelled") return 1;
           if (b.orderStatus === "Cancelled") return -1;
@@ -31,7 +31,7 @@ export default function MyOrder() {
           if (b.orderStatus === "Delivered") return -1;
           return 0;
         });
-
+       
         setOrders(sortedOrders);
       } catch (error) {
         console.error("Error fetching orders", error);

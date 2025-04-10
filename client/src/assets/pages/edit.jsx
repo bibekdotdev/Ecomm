@@ -38,7 +38,7 @@ export default function Edit() {
   useEffect(() => {
     async function fetchProduct() {
       try {
-        const response = await axios.get(`http://localhost:8080/ecomm/admin/product/${id}`);
+        const response = await axios.get(`https://ecomm-8piu.onrender.com/ecomm/admin/product/${id}`);
         const { name, description, price, discount, quantity, category, subcategory, images } = response.data;
 
         setProduct({
@@ -116,7 +116,7 @@ export default function Edit() {
     try {
       let token = Cookies.get("token");
       formData.append("token", token);
-      await axios.put(`http://localhost:8080/ecomm/admin/edit/${id}`, formData, {
+      await axios.put(`https://ecomm-8piu.onrender.com/ecomm/admin/edit/${id}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`,

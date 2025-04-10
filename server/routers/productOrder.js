@@ -41,6 +41,11 @@ routes.post("/placedOrder", async (req, res) => {
       const seller = firstProduct.owner;
 
       // Create new order
+      if (firstProduct.quantity < orderData.orderItems.reduce((sum, item) => sum + item.quantity, 0)) {
+        return res.status(400).json({
+          error: `Requested quantity (${orderData.orderItems.reduce((sum, item) => sum + item.quantity, 0)}) exceeds available stock (${firstProduct.quantity}). Please adjust your order accordingly.`
+        });
+      }
       const newOrder = new Order({
         buyer: buyer._id,
         seller: seller._id,

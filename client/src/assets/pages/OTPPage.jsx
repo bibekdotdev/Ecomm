@@ -15,7 +15,7 @@ const OTPPage = () => {
         e.preventDefault();
         setLoading(true);
         try {
-            const response = await axios.post('http://localhost:8080/ecomm/authentication/signup', {
+            const response = await axios.post('https://ecomm-8piu.onrender.com/ecomm/authentication/signup', {
                 otp,
                 id: location.state.e
             });

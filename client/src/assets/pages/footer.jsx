@@ -16,7 +16,7 @@ const Footer = () => {
           <a href="#" className="text-white" target="_blank" rel="noopener noreferrer">
             <FaTwitter />
           </a>
-         <a href="bibekjana68@gmail.com" className="text-white">
+         <a href="mailto:bibekjana68@gmail.com" className="text-white">
             <FaEnvelope />
           </a>
         </div>

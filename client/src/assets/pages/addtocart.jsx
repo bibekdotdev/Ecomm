@@ -18,7 +18,7 @@ export default function AddToCart() {
   const fetchCart = async () => {
     setLoading(true);
     try {
-      const response = await axios.post('http://localhost:8080/ecomm/productOrder/Cart', { token });
+      const response = await axios.post('https://ecomm-8piu.onrender.com/ecomm/productOrder/Cart', { token });
       setCart(response.data);
       calculateTotal(response.data);
       // toast.success("Cart loaded successfully!");
@@ -38,7 +38,7 @@ export default function AddToCart() {
   const handleIncrease = async (productId) => {
     // setLoading(true);
     try {
-      await axios.post('http://localhost:8080/ecomm/productOrder/IncreaseQuantity', { token, productId });
+      await axios.post('https://ecomm-8piu.onrender.com/ecomm/productOrder/IncreaseQuantity', { token, productId });
       setCart((prevCart) => {
         const updatedCart = prevCart.map((item) =>
           item.orderItems.product._id === productId
@@ -59,7 +59,7 @@ export default function AddToCart() {
   const handleDecrease = async (productId) => {
     // setLoading(true);
     try {
-      await axios.post('http://localhost:8080/ecomm/productOrder/DecreaseQuantity', { token, productId });
+      await axios.post('https://ecomm-8piu.onrender.com/ecomm/productOrder/DecreaseQuantity', { token, productId });
       setCart((prevCart) => {
         const updatedCart = prevCart.map((item) =>
           item.orderItems.product._id === productId && item.orderItems.quantity > 1
@@ -80,7 +80,7 @@ export default function AddToCart() {
   const handleRemove = async (productId) => {
     setLoading(true);
     try {
-      await axios.post('http://localhost:8080/ecomm/productOrder/removeItem', { token, productId });
+      await axios.post('https://ecomm-8piu.onrender.com/ecomm/productOrder/removeItem', { token, productId });
       toast.success("Item removed!");
       // setTimeout(async () => {
         await fetchCart();

@@ -6,7 +6,7 @@ const Product = require("../models/product");
 const Order = require("../models/order");
 const Owner = require("../models/owner");
 const AddToCart=require('../models/addtocart');
-const secretKey = "12kjfsdlkoie8sddd&&%&TB*&ENH&*SDNH(*";
+const secretKey = process.env.SECRETKEY;
 
 routes.post("/placedOrder", async (req, res) => {
   try {

@@ -10,14 +10,14 @@ const cloudinary = require("cloudinary").v2;
 const bcrypt = require("bcrypt");
 const Tempdata=require("../models/temdata.js")
 const nodemailer = require("nodemailer");
-const secretKey = "12kjfsdlkoie8sddd&&%&TB*&ENH&*SDNH(*";
+const secretKey = process.env.SECRETKEY;
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
   port: 587,
   secure: false, // true for port 465, false for other ports
   auth: {
-    user: "bibekjana68@gmail.com",
-    pass: "pcpg choy qazx ljwm",
+    user: process.env.MY_EMAIL,
+    pass: process.env.PASS_KEY,
   },
 });
 routes.post("/placedOrder", async (req, res) => {

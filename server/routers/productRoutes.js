@@ -6,7 +6,7 @@ const { CloudinaryStorage } = require('multer-storage-cloudinary');
 const Product = require('../models/product');
 const Owner = require('../models/owner.js');
 const Review=require('../models/review.js');
-let secretKey = '12kjfsdlkoie8sddd&&%&TB*&ENH&*SDNH(*';
+let secretKey = process.env.SECRETKEY;
 var jwt = require('jsonwebtoken');
 const Order = require('../models/order.js');
 

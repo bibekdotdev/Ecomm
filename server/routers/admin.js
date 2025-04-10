@@ -10,7 +10,7 @@ const Owner = require('../models/owner');
 const Order = require("../models/order");
 
 // Secret Key (Use Environment Variables in Production)
-const secretKey = "12kjfsdlkoie8sddd&&%&TB*&ENH&*SDNH(*";
+const secretKey = process.env.SECRETKEY;
 
 // Cloudinary Configuration
 cloudinary.config({
@@ -27,6 +27,7 @@ const storage = new CloudinaryStorage({
         allowed_formats: ['png', 'jpg', 'jpeg']
     },
 });
+
 
 const upload = multer({ storage: storage });
 

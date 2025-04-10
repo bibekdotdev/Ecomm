@@ -21,7 +21,7 @@ export default function MyOrder() {
     const fetchOrders = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8080/ecomm/admin/my-orders/${token}`
+          `https://ecomm-8piu.onrender.com/ecomm/admin/my-orders/${token}`
         );
 
         const sortedOrders = response.data.sort((a, b) => {
@@ -45,7 +45,7 @@ export default function MyOrder() {
 
   const handleCancelOrder = async (orderId) => {
     try {
-      await axios.delete(`http://localhost:8080/ecomm/productOrder/cancel-myorder`, {
+      await axios.delete(`https://ecomm-8piu.onrender.com/ecomm/productOrder/cancel-myorder`, {
         params: {
           token,
           orderId,

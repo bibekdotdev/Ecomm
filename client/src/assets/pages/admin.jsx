@@ -17,7 +17,7 @@ export default function Admin() {
             try {
                 const token = Cookies.get("token");
                 if (!token) throw new Error("No token found");
-                const response = await axios.post("http://localhost:8080/ecomm/admin/yourproduct", { token },);
+                const response = await axios.post("https://ecomm-8piu.onrender.com/ecomm/admin/yourproduct", { token },);
                 setProducts(response.data);
             } catch (error) {
                 toast.error("Error fetching products");
@@ -33,7 +33,7 @@ export default function Admin() {
         try {
             const token = Cookies.get("token");
             if (!token) throw new Error("No token found");
-            await axios.delete(`http://localhost:8080/ecomm/admin/deleteproduct/${id}`, {
+            await axios.delete(`https://ecomm-8piu.onrender.com/ecomm/admin/deleteproduct/${id}`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setProducts(products.filter(product => product._id !== id));

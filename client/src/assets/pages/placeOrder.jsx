@@ -84,7 +84,7 @@ const OrderForm = () => {
       navigate('/home');
     } catch (error) {
       console.error("Error placing order:", error);
-      toast.error("Failed to place order.");
+     toast.error(error.response.data.error);
     } finally {
       setLoading(false);
     }

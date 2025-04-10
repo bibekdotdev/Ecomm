@@ -38,6 +38,7 @@ export default function Edit() {
   useEffect(() => {
     async function fetchProduct() {
       try {
+          setLoading(false);
         const response = await axios.get(`https://ecomm-8piu.onrender.com/ecomm/admin/product/${id}`);
         const { name, description, price, discount, quantity, category, subcategory, images } = response.data;
 
@@ -51,10 +52,13 @@ export default function Edit() {
           subcategory,
           images: [],
           error: "",
+          
         });
+          setLoading(false);
       } catch (error) {
         console.error("Error fetching product", error);
         toast.error("Failed to fetch product data");
+          setLoading(false);
       }
     }
     fetchProduct();

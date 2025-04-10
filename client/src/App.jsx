@@ -9,12 +9,12 @@ function App() {
   return (
     <Box sx={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
       <Navbar />
-      <div style={{ marginTop: "40px" }}>
-  <Outlet />
-      </div>
+      <Box sx={{ flexGrow: 1, mt: "40px" }}>
+        <Outlet />
+      </Box>
       <Footer />
     </Box>
   );
-}
+  
 
 export default App;

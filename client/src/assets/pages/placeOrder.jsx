@@ -71,7 +71,7 @@ const OrderForm = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post("http://localhost:8080/ecomm/productOrder/placedOrder", {
+      const response = await axios.post("https://ecomm-8piu.onrender.com/ecomm/productOrder/placedOrder", {
         orderData,
         token,
       });

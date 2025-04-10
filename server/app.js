@@ -45,9 +45,9 @@ app.get('/allData', async (req, res) => {
     console.log(allValue);
     res.json(allValue);
   });
-  app.all('*',(req,res)=>{
-    console.log('hi');
-    res.redirect('https://ecomm-2-c8s5.onrender.com/notfoundpage')
-  })
+  // app.all('*',(req,res)=>{
+  //   console.log('hi');
+  //   res.redirect('https://ecomm-2-c8s5.onrender.com/notfoundpage')
+  // })
   
   

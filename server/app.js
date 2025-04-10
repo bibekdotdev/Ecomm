@@ -21,7 +21,7 @@ mongoose.connect(process.env.CONN).then(()=> console.log("database is connected"
 app.use(express.json());
 
 app.use(cors({
-    origin:'https://ecomm-8piu.onrender.com',
+    origin:'https://ecomm-2-c8s5.onrender.com',
     credentials:true
 }));
 
@@ -47,7 +47,7 @@ app.get('/allData', async (req, res) => {
   });
   app.all('*',(req,res)=>{
     console.log('hi');
-    res.redirect('https://ecomm-8piu.onrender.com/notfoundpage')
+    res.redirect('https://ecomm-2-c8s5.onrender.com/notfoundpage')
   })
   
   

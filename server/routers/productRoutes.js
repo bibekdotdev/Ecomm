@@ -161,14 +161,16 @@ routes.get('/getReviews/:id', async (req, res) => {
     if (token) {
       const decodedToken = await jwt.verify(token, secretKey);
       const buyer = await Owner.findOne({ email: decodedToken.email });
-
       if (buyer) {
-        const order = await Order.findOne({ buyer: buyer.id });
-
+        const order = await Order.findOne({$and:[{ buyer: buyer.id },{orderItems:id}]});
+        if(order){
+        console.log(order);
+        
         if (order && order.orderStatus === "Delivered") {
           canReview = true;
         }
       }
+       }
     }
 
     console.log(canReview);

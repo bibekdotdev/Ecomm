@@ -28,7 +28,7 @@ const OTPPage = () => {
                 toast.success("OTP Verified Successfully!");
                
                 // setTimeout(() => {
-                   navigate('/Signin');
+                   navigate('/signup');
                 // }, 500);
             } else {
                 toast.error("No token received. Something went wrong.");

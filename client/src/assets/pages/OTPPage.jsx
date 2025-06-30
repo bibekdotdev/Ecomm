@@ -26,8 +26,11 @@ const OTPPage = () => {
                 console.log("JWT Token received:", jwtToken);
                 Cookies.set("token", jwtToken, { expires: 7, secure: true, sameSite: 'Lax' });
                 toast.success("OTP Verified Successfully!");
+                 setTimeout(() => {
+        navigate('/Home');
+      }, 2000);
                 // setTimeout(() => {
-                    navigate('/Home');
+                   
                 // }, 500);
             } else {
                 toast.error("No token received. Something went wrong.");

@@ -21,10 +21,9 @@ mongoose.connect(process.env.CONN).then(()=> console.log("database is connected"
 app.use(express.json());
 
 app.use(cors({
-    origin:'https://ecomm-2-c8s5.onrender.com',
-    credentials:true
+  origin: 'https://ecomm-2-c8s5.onrender.com',
+  credentials: true // if you're using cookies or auth headers
 }));
-
 app.use('/ecomm/product', productRouters);
 app.use('/ecomm/authentication', authentication);
 app.use('/ecomm/productOrder',productOrder);

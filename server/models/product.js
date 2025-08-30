@@ -49,7 +49,7 @@ const productSchema = new mongoose.Schema({
  
 });
 
-// Create a Model
+
 const Product = mongoose.model('Product', productSchema);
 
 module.exports = Product;

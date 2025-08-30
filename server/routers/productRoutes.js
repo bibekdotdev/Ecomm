@@ -150,13 +150,13 @@ routes.post('/addReview/:id', async (req, res) => {
 
 routes.get('/getReviews/:id', async (req, res) => {
   try {
-    const { id } = req.params;  // Product ID from URL
-     const token = req.headers.token;;  // JWT token from query parameters
+    const { id } = req.params;  
+     const token = req.headers.token;; 
     console.log(token);
-    // Fetch reviews for the product
+  
     let reviews = await Review.find({ product: id }).populate('user', 'email');
 
-    // If a token is provided, verify and check if the buyer can review
+
     let canReview = false;
     if (token) {
       const decodedToken = await jwt.verify(token, secretKey);

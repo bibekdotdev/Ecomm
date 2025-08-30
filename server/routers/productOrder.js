@@ -17,7 +17,7 @@ routes.post("/placedOrder", async (req, res) => {
         return res.status(400).json({ error: "Invalid order items" });
       }
 
-      // Decode buyer from token
+
       const decoded = jwt.verify(token, secretKey);
       const buyer = await Owner.findOne({ email: decoded.email });
 
@@ -25,13 +25,13 @@ routes.post("/placedOrder", async (req, res) => {
         return res.status(400).json({ error: "Invalid buyer details" });
       }
 
-      // Validate productId
+   
       const firstProductId = orderData.orderItems[0].productId;
       if (!mongoose.Types.ObjectId.isValid(firstProductId)) {
         return res.status(400).json({ error: "Invalid product ID" });
       }
 
-      // Fetch seller (assuming all products belong to the same seller)
+
       const firstProduct = await Product.findById(firstProductId).populate("owner");
 
       if (!firstProduct || !firstProduct.owner) {
@@ -40,7 +40,7 @@ routes.post("/placedOrder", async (req, res) => {
 
       const seller = firstProduct.owner;
 
-      // Create new order
+
       if (firstProduct.quantity < orderData.orderItems.reduce((sum, item) => sum + item.quantity, 0)) {
         return res.status(400).json({
           error: `Requested quantity (${orderData.orderItems.reduce((sum, item) => sum + item.quantity, 0)}) exceeds available stock (${firstProduct.quantity}). Please adjust your order accordingly.`
@@ -57,7 +57,7 @@ routes.post("/placedOrder", async (req, res) => {
         orderTime: new Date().toISOString(),
       });
       console.log(newOrder);
-      // Save order to DB
+
       await newOrder.save();
       await firstProduct.updateOne({ $set: { quantity: firstProduct.quantity - (orderData.orderItems.reduce((sum, item) => sum + item.quantity, 0)) } });
 
@@ -92,16 +92,16 @@ routes.post("/addToCart/:e", async (req, res) => {
         },
       });
   
-      // Save the cart document
+
       await addCart.save();
       
-      // Respond with a success message or the saved cart
+   
       res.status(200).json({ message: "Product added to cart successfully!" });
     }
     
   } catch (error) {
     console.error(error);
-    // Respond with an error message
+
     res.status(500).json({ message: "An error occurred while adding to the cart", error: error.message });
   }
 });
@@ -111,7 +111,7 @@ routes.post("/Cart", async (req, res) => {
     let { token } = req.body;
     const decoded = await jwt.verify(token, secretKey);
     let buyer = await Owner.findOne({ email: decoded.email });
-    // console.log(buyer);
+
     let allorder = await AddToCart.find({ buyer: buyer.id }).populate('orderItems.product');
     res.json(allorder);
   } catch (error) {
@@ -254,20 +254,20 @@ routes.post("/placeOrderFromCard", async (req, res) => {
 routes.delete("/cancel-myorder", async (req, res) => {
   try {
  
-    const { token, orderId } = req.query;  // Access query params
+    const { token, orderId } = req.query;  
 
-    // Check if token or orderId are missing
+
     if (!token || !orderId) {
       return res.status(400).json({ message: 'Token and Order ID are required' });
     }
 
-    // Log for debugging
+   
 
 
-    // Verify the token
+
     const decoded = await jwt.verify(token, secretKey);
 
-    // Find the buyer based on the decoded email
+ 
     const buyer = await Owner.findOne({ email: decoded.email });
  
 
@@ -281,20 +281,20 @@ routes.delete("/cancel-myorder", async (req, res) => {
       return res.status(404).json({ message: 'Order not found' });
     }
 
-    // Update the order status to 'Cancelled'
-    result.orderStatus = 'Cancelled';
-    await result.save();  // Save the updated order
 
-    // Successfully cancelled the order
+    result.orderStatus = 'Cancelled';
+    await result.save(); 
+
+ 
     res.status(200).json({ message: 'Order cancelled successfully' });
 
   } catch (error) {
-    // Handle different error cases
+ 
     if (error.name === 'JsonWebTokenError') {
       return res.status(401).json({ message: 'Invalid or expired token' });
     }
 
-    console.error('Error:', error); // Log error for debugging
+    console.error('Error:', error);
     res.status(500).json({ message: 'Internal Server Error' });
   }
 });

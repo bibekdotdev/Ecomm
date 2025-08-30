@@ -9,17 +9,17 @@ const Product = require('../models/product');
 const Owner = require('../models/owner');
 const Order = require("../models/order");
 
-// Secret Key (Use Environment Variables in Production)
+
 const secretKey = process.env.SECRETKEY;
 
-// Cloudinary Configuration
+
 cloudinary.config({
     cloud_name: process.env.CLOUD_NAME,
     api_key: process.env.CLOUD_API_KEY,
     api_secret: process.env.CLOUD_API_SECRET,
 });
 
-// Multer Storage for Cloudinary
+
 const storage = new CloudinaryStorage({
     cloudinary: cloudinary,
     params: {
@@ -32,7 +32,6 @@ const storage = new CloudinaryStorage({
 const upload = multer({ storage: storage });
 
 
-// ✅ Get Owner's Products
 routes.post("/yourproduct", async (req, res) => {
     try {
         let details = jwt.verify(req.body.token, secretKey);
@@ -48,7 +47,7 @@ routes.post("/yourproduct", async (req, res) => {
     }
 });
 
-// ✅ Delete Product
+
 routes.delete('/deleteproduct/:id', async (req, res) => {
     try {
         let product = await Product.findByIdAndDelete(req.params.id);
@@ -62,7 +61,6 @@ routes.delete('/deleteproduct/:id', async (req, res) => {
     }
 });
 
-// ✅ Get a Single Product
 routes.get('/product/:id', async (req, res) => {
     try {
         let product = await Product.findById(req.params.id);
@@ -75,7 +73,7 @@ routes.get('/product/:id', async (req, res) => {
     }
 });
 
-// ✅ Edit Product
+
 routes.put('/edit/:id', upload.array("images", 10), async (req, res) => {
     try {
         let decoded = jwt.verify(req.body.token, secretKey);
@@ -120,7 +118,7 @@ routes.put('/edit/:id', upload.array("images", 10), async (req, res) => {
     }
 });
 
-// ✅ Get Product Details
+
 routes.post('/personaldetails/:val', async (req, res) => {
     try {
         let product = await Product.findById(req.params.val);
@@ -133,7 +131,7 @@ routes.post('/personaldetails/:val', async (req, res) => {
     }
 });
 
-// ✅ View Orders
+
 routes.get('/vieworder/:token', async (req, res) => {
    
     try {
@@ -154,7 +152,7 @@ routes.get('/vieworder/:token', async (req, res) => {
     }
 });
 
-// ✅ Update Order Status
+
 routes.put('/updateorder/:id', async (req, res) => {
     try {
         let { orderStatus, paymentStatus } = req.body;
@@ -169,7 +167,6 @@ routes.put('/updateorder/:id', async (req, res) => {
     }
 });
 
-// ✅ Delete Order
 routes.delete('/deleteorder/:id', async (req, res) => {
     try {
         let order = await Order.findByIdAndUpdate(req.params.id, { seller: null }, { new: true });
@@ -183,7 +180,7 @@ routes.delete('/deleteorder/:id', async (req, res) => {
     }
 });
 
-// ✅ Get Buyer's Orders
+
 routes.get('/my-orders/:id', async (req, res) => {
     try {
         let email = jwt.verify(req.params.id, secretKey);
@@ -200,7 +197,7 @@ routes.get('/my-orders/:id', async (req, res) => {
     }
 });
 
-// ✅ Check Login Status
+
 routes.post('/islogin/:token', async (req, res) => {
     try {
         jwt.verify(req.params.token, secretKey);

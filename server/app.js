@@ -22,7 +22,7 @@ app.use(express.json());
 
 app.use(cors({
   origin: 'https://ecomm-2-c8s5.onrender.com',
-  credentials: true // if you're using cookies or auth headers
+  credentials: true 
 }));
 app.use('/ecomm/product', productRouters);
 app.use('/ecomm/authentication', authentication);

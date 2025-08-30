@@ -14,7 +14,7 @@ const secretKey = process.env.SECRETKEY;
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
   port: 587,
-  secure: false, // true for port 465, false for other ports
+  secure: false,
   auth: {
     user: process.env.MY_EMAIL,
     pass: process.env.PASS_KEY,
@@ -84,22 +84,21 @@ routes.post("/tempup", async (req, res) => {
       return res.status(400).json({ error: "Email is already in use" });
     }
   try {
-    // Generate a random 6-digit OTP
+ 
     let otp = Math.floor(100000 + Math.random() * 900000).toString();
 
-    // Define mail options
+    
     const mailOptions = {
-      from: 'bibekjana68@gmail.com', // Your email (sender)
-      to: email,                    // Recipient email
-      subject: 'Your OTP for Signup', // Subject line
-      text: `Your OTP for account signup is: ${otp}\n\nThis OTP is valid for the next 10 minutes. Please do not share it with anyone.` // OTP message
+      from: 'bibekjana68@gmail.com', 
+      to: email,                   
+      subject: 'Your OTP for Signup', 
+      text: `Your OTP for account signup is: ${otp}\n\nThis OTP is valid for the next 10 minutes. Please do not share it with anyone.`
     };
 
-    // Send OTP via email
+
     const info = await transporter.sendMail(mailOptions);
     console.log("Message sent: ", info.response);
 
-    // Save OTP and user data to Tempdata collection
     const tempData = new Tempdata({
       name: username,
       email,
@@ -111,7 +110,7 @@ routes.post("/tempup", async (req, res) => {
     console.log(v.otp);
     console.log('Temporary data saved.');
 
-    // Return success response
+
     res.status(200).json({ message: 'OTP sent to your email. Please verify.',email:v._id });
   } catch (error) {
     console.error('Error sending OTP:', error);
@@ -124,10 +123,10 @@ routes.post("/signup", async (req, res, next) => {
     const { otp, id } = req.body;
     console.log(otp, id);
 
-    // Find temporary data by ID
+
     let allTempData = await Tempdata.findById(id);
     console.log(allTempData)
-    // Check if data exists
+
     if (!allTempData) {
       return res.status(404).json({ error: "No temporary data found for this ID" });
     }
@@ -139,8 +138,8 @@ routes.post("/signup", async (req, res, next) => {
       return res.status(400).json({ error: "Invalid OTP" });
     }
 
-    // Check if OTP has expired (10 minutes expiration time)
-    const otpExpirationTime = 10 * 60 * 1000;  // 10 minutes in milliseconds
+ 
+    const otpExpirationTime = 10 * 60 * 1000;
     if (Date.now() - new Date(createdAt).getTime() > otpExpirationTime) {
       return res.status(400).json({ error: "OTP has expired" });
     }
@@ -148,7 +147,7 @@ routes.post("/signup", async (req, res, next) => {
     const salt = await bcrypt.genSalt(8);
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    // Create a new Owner and save to the database
+ 
     const newOwner = new Owner({
       name,
       email,
